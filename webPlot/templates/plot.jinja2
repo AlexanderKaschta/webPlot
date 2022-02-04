@@ -1,0 +1,14 @@
+{% extends 'base.jinja2' %}
+
+{% block body %}
+    <div class="ui main container">
+        <h1 class="ui header">webPlot Demo Plots</h1>
+        <div id="plot"></div>
+    </div>
+{% endblock %}
+
+{% block script_body %}
+    <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plotly-2.8.3.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

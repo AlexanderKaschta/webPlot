@@ -1,0 +1,21 @@
+.ui.menu {
+  min-height: unset; }
+  .ui.menu .item img {
+    margin-right: 1em !important; }
+
+.main.container {
+  margin-top: 2em; }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+
+.main {
+  flex: 1; }
+
+footer {
+  border-top: 1px solid #DDDDDD !important;
+  margin-top: 2em !important;
+  background-color: #fafafa !important;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.08) inset !important; }
