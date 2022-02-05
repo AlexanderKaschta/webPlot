@@ -26,6 +26,12 @@ def start():
     return "Send start"
 
 
+@app.route('/stop')
+def stop():
+    socketio.emit("stop")
+    return "Send stop"
+
+
 @app.route('/test')
 def test():
     data = {"x": 0, "y": 5}
