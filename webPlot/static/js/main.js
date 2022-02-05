@@ -9,7 +9,7 @@ const layout = {
 
 var socket = io();
 socket.on('connect', function () {
-    socket.emit('connected', {data: 'I\'m connected!'});
+    socket.emit('connected', {client: 1});
 });
 
 socket.on('error', console.error.bind(console));
@@ -20,11 +20,9 @@ socket.on('data', function (data) {
     // Log the transferred data
     console.log(data);
 
-    var time = new Date();
-
     var update = {
-        x:  [[time]],
-        y: [[data.y]]
+        x:  [[data.time]],
+        y: [[data.data]]
     }
 
     Plotly.extendTraces("plot", update, [0])

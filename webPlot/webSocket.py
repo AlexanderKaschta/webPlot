@@ -1,18 +1,15 @@
-from webPlot import socketio, data_queue
+from webPlot import socketio
 
 
 @socketio.on('connected')
-def connected(json):
-    print('A new client connected: ' + str(json))
+def connected(json_data):
+    if "type" in json_data:
+        print("A new sensor connected: " + str(json_data))
+    else:
+        print('A new client connected: ' + str(json_data))
 
 
-@socketio.on('my event')
-def handle_my_custom_event(json):
-    print('received json: ' + str(json))
-
-
-def check_for_data():
-    while not data_queue.empty():
-        a = data_queue.get()
-        socketio.emit("data", a, json=True)
-        print(a)
+@socketio.on('new-data')
+def handle_my_custom_event(data):
+    print('received json: ' + str(data))
+    socketio.emit("data", data, json=True)
