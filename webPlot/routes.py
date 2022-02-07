@@ -1,5 +1,3 @@
-import multiprocessing as mp
-
 from flask import render_template
 
 from webPlot import app, socketio

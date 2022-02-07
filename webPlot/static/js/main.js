@@ -1,3 +1,26 @@
+// Define the toggle button
+
+var toggle = document.getElementById('toggle');
+
+var running = false;
+
+toggle.addEventListener("click", function () {
+    // Make the matching network request in the background
+    let xhr = new XMLHttpRequest();
+    if (running) {
+        xhr.open('GET', '/stop', true);
+        toggle.classList.remove("active");
+    } else {
+        xhr.open('GET', '/start', true);
+        toggle.classList.add("active");
+    }
+    xhr.send(null);
+
+    // Invert the running state
+    running = !running;
+});
+
+
 // Define the plot config
 const config = {responsive: true, locale: 'de', displaylogo: false};
 

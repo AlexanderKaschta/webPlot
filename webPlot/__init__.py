@@ -8,6 +8,3 @@ app.config['SECRET_KEY'] = 'DasIstEinSuperSichererSchlüsselFürDieVerschlüssel
 
 # Init the Socket.IO
 socketio = SocketIO(app)
-
-from webPlot.routes import *
-from webPlot.webSocket import *
