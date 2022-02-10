@@ -27,7 +27,8 @@ const config = {responsive: true, locale: 'de', displaylogo: false};
 const layout = {
     title: "Test-Plot",
     font: {size: 16},
-    margin: {t: 80}
+    margin: {t: 80},
+    showlegend: true,
 };
 
 var socket = io();
@@ -39,14 +40,46 @@ socket.on('error', console.error.bind(console));
 
 Plotly.newPlot("plot", [{x: [], y: []}], layout, config);
 
+socket.on('x-axis', function (data) {
+
+    var update = {
+        'xaxis.title.text': data.title + "(" + data.unit + ")",
+    };
+
+    Plotly.relayout("plot", update)
+});
+
+socket.on('y-axis', function (data) {
+
+    var update = {
+        'yaxis.title.text': data.title + "(" + data.unit + ")",
+    };
+
+    Plotly.relayout("plot", update)
+});
+
 socket.on('data', function (data) {
     // Log the transferred data
     console.log(data);
 
+    var time = new Date();
+
     var update = {
-        x:  [[data.time]],
+        x: [[new Date(data.time * 1000)]],
         y: [[data.data]]
     }
+
+    var olderTime = time.setMinutes(time.getMinutes() - 1);
+    var futureTime = time.setMinutes(time.getMinutes() + 1);
+
+    var minuteView = {
+        xaxis: {
+            type: 'date',
+            range: [olderTime, futureTime]
+        }
+    };
+
+    Plotly.relayout("plot", minuteView);
 
     Plotly.extendTraces("plot", update, [0])
 });

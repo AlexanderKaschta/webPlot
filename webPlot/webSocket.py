@@ -10,6 +10,13 @@ def connected(json_data):
 
 
 @socketio.on('new-data')
-def handle_my_custom_event(data):
+def handle_new_data(data):
     print('received json: ' + str(data))
     socketio.emit("data", data, json=True)
+
+
+@socketio.on('axis')
+def handle_axis_event(data):
+    if data["index"] == 1:
+        socketio.emit("x-axis", {"title": "Time", "unit": "Timestamp"}, json=True)
+        socketio.emit("y-axis", {"title": data["label"], "unit": data["unit"]}, json=True)
