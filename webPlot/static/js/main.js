@@ -31,7 +31,7 @@ const layout = {
     showlegend: true,
 };
 
-var socket = io();
+var socket = io({transports: ['websocket']});
 socket.on('connect', function () {
     socket.emit('connected', {client: 1});
 });
