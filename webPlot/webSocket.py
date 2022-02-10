@@ -12,11 +12,11 @@ def connected(json_data):
 @socketio.on('new-data')
 def handle_new_data(data):
     print('received json: ' + str(data))
-    socketio.emit("data", data, json=True)
+    socketio.emit("data", data, json=True, broadcast=True)
 
 
 @socketio.on('axis')
 def handle_axis_event(data):
-    if data["index"] == 1:
-        socketio.emit("x-axis", {"title": "Time", "unit": "Timestamp"}, json=True)
-        socketio.emit("y-axis", {"title": data["label"], "unit": data["unit"]}, json=True)
+    if data["index"] == 0:
+        socketio.emit("x-axis", {"title": "Time", "unit": "Timestamp"}, json=True, broadcast=True)
+        socketio.emit("y-axis", {"title": data["label"], "unit": data["unit"]}, json=True, broadcast=True)
