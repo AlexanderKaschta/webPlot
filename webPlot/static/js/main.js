@@ -66,7 +66,7 @@ socket.on('data', function (data) {
 
     var update = {
         x: [[new Date(data.time * 1000)]],
-        y: [[data.data]]
+        y: [[data.data[0]]]
     }
 
     var olderTime = time.setMinutes(time.getMinutes() - 1);
