@@ -38,12 +38,12 @@ socket.on('connect', function () {
 
 socket.on('error', console.error.bind(console));
 
-Plotly.newPlot("plot", [{x: [], y: []}], layout, config);
+Plotly.newPlot("plot", [{x: [], y: [], name: "Messung"}], layout, config);
 
 socket.on('x-axis', function (data) {
 
     var update = {
-        'xaxis.title.text': data.title + "(" + data.unit + ")",
+        'xaxis.title.text': data.title + " (" + data.unit + ")",
     };
 
     Plotly.relayout("plot", update)
@@ -52,7 +52,7 @@ socket.on('x-axis', function (data) {
 socket.on('y-axis', function (data) {
 
     var update = {
-        'yaxis.title.text': data.title + "(" + data.unit + ")",
+        'yaxis.title.text': data.title + " (" + data.unit + ")",
     };
 
     Plotly.relayout("plot", update)
